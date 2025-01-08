@@ -1,10 +1,7 @@
-"use client";
-
 import Image from "next/image";
 import type { Token } from "@/app/_types/types";
 import Card from "@/app/_components/Card";
-import Modal from "@/app/_components/Modal";
-import AddTokenForm from "./AddTokenForm";
+import AddTokenModal from "@/app/_components/AddTokenModal";
 
 interface ChainCardProps extends Token {
   tokens: Token[];
@@ -18,7 +15,7 @@ function ChainCard({ name, logo, balance, tokens }: ChainCardProps) {
         <span className="text-xl inline-block mr-auto">{name}</span>
 
         <Image src="/gas-fill.svg" alt="gas" width={22} height={22} />
-        <span className="text-sm">Gas: 123 Gwei</span>
+        <span className="text-sm">Gas: {balance} Gwei</span>
       </div>
 
       <div className="px-1 space-y-2">
@@ -34,23 +31,7 @@ function ChainCard({ name, logo, balance, tokens }: ChainCardProps) {
         ))}
       </div>
 
-      <Modal>
-        <Modal.Open windowName="add-token">
-          <button className="hover:bg-stone-100 w-full flex items-center justify-center gap-2 px-4 py-2 border rounded-md mt-auto">
-            <Image src="/plus.svg" alt="add" width={16} height={16} />
-            <span>Add Token</span>
-          </button>
-        </Modal.Open>
-
-        <Modal.Window windowName="add-token">
-          <AddTokenForm
-            onCloseModal={() => {
-              // will be replaced by onCloseModal coming from cloneElement in Modal
-              return;
-            }}
-          />
-        </Modal.Window>
-      </Modal>
+      <AddTokenModal />
     </Card>
   );
 }
