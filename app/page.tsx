@@ -1,5 +1,5 @@
-import { BitcoinCard } from "@/app/_components/BitcoinCard";
-import { ChainCard } from "@/app/_components/ChainCard";
+import BitcoinCard from "@/app/_components/BitcoinCard";
+import ChainCard from "@/app/_components/ChainCard";
 import { bitcoinData, chainData } from "@/app/_utils/mockData";
 
 export default function Page() {

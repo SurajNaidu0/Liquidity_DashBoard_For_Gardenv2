@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { Token } from "../_types/types";
 import Card from "./Card";
 
-export function BitcoinCard({ name, logo, balance }: Token) {
+function BitcoinCard({ name, logo, balance }: Token) {
   return (
     <Card>
       <div className="pb-2  font-medium flex items-center gap-2">
@@ -14,3 +14,5 @@ export function BitcoinCard({ name, logo, balance }: Token) {
     </Card>
   );
 }
+
+export default BitcoinCard;
