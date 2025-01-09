@@ -4,7 +4,11 @@ import Modal from "@/app/_components/Modal";
 import AddTokenForm from "@/app/_components/AddTokenForm";
 import Image from "next/image";
 
-function AddTokenModal() {
+interface AddTokenModalProps {
+  chainIdentifier: string;
+}
+
+function AddTokenModal({ chainIdentifier }: AddTokenModalProps) {
   return (
     <Modal>
       <Modal.Open windowName="add-token">
@@ -16,6 +20,7 @@ function AddTokenModal() {
 
       <Modal.Window windowName="add-token">
         <AddTokenForm
+          chainIdentifier={chainIdentifier}
           onCloseModal={() => {
             // will be replaced by onCloseModal coming from cloneElement in Modal
             return;

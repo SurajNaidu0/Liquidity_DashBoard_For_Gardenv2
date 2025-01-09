@@ -1,8 +1,8 @@
-"use client";
-
 import { useState } from "react";
+import { addToken } from "../_lib/actions";
 
 interface AddTokenFormProps {
+  chainIdentifier: string;
   onCloseModal: () => void;
 }
 
@@ -16,7 +16,7 @@ const initialState: AddTokenFormData = {
   address: "",
 };
 
-function AddTokenForm({ onCloseModal }: AddTokenFormProps) {
+function AddTokenForm({ chainIdentifier, onCloseModal }: AddTokenFormProps) {
   const [formState, setFormState] = useState(initialState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,15 +26,10 @@ function AddTokenForm({ onCloseModal }: AddTokenFormProps) {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formState);
-  };
-
   return (
     <form
-      action=""
-      onSubmit={handleSubmit}
+      onSubmit={onCloseModal}
+      action={addToken.bind(null, chainIdentifier)}
       className="bg-white rounded-lg max-w-md space-y-6"
     >
       <h2 className="text-xl font-semibold text-gray-800">Add Token</h2>
