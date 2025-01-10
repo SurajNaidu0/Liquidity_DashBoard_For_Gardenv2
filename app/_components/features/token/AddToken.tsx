@@ -14,7 +14,7 @@ function AddToken({ userId, chainIdentifier }: AddTokenProps) {
   return (
     <Modal>
       <Modal.Open windowName="add-token">
-        <button className="hover:bg-stone-200 w-full flex items-center justify-center gap-2 px-4 py-2 border border-stone-300 rounded-md mt-auto">
+        <button className="hover:bg-stone-200 w-full flex items-center justify-center gap-2 px-4 py-2 border border-stone-300 rounded-md">
           <Image src="/plus.svg" alt="add" width={16} height={16} />
           <span>Add Token</span>
         </button>

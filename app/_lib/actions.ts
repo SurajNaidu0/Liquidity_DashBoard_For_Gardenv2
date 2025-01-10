@@ -52,6 +52,15 @@ export async function editAddress(
   revalidatePath("/");
 }
 
+export async function deleteAddress(userId: string): Promise<void> {
+  config.data.users = config.data.users.filter(
+    (user) => user.userId !== userId
+  );
+
+  updateConfig(config);
+  revalidatePath("/");
+}
+
 export async function addChain(
   userId: string,
   formData: FormData
@@ -76,6 +85,22 @@ export async function addChain(
     chainType: "",
     tokens: [],
   });
+
+  updateConfig(config);
+  revalidatePath("/");
+}
+
+export async function deleteChain(
+  userId: string,
+  chainIdentifier: string
+): Promise<void> {
+  const userObject: UserType | undefined = findUser(config, userId);
+
+  if (!userObject) return;
+
+  userObject.chains = userObject.chains.filter(
+    (chain) => chain.identifier !== chainIdentifier
+  );
 
   updateConfig(config);
   revalidatePath("/");

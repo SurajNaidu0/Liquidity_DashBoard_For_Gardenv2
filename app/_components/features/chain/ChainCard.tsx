@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Card from "@/app/_components/Card";
-import AddToken from "@/app/_components/AddToken";
+import AddToken from "@/app/_components/features/token/AddToken";
 import {
   getWalletBalance,
   getWalletBalanceERC20,
 } from "@/app/_lib/dataService";
-import TokenDisplay from "@/app/_components/Token";
+import TokenDisplay from "@/app/_components/features/token/TokenDisplay";
 import type { ChainType, TokenType } from "@/app/_types/types";
+import DeleteChain from "@/app/_components/features/chain/DeleteChain";
 
 interface ChainCardProps {
   userId: string;
@@ -52,7 +53,10 @@ async function ChainCard({ userId, fillerAddress, chainData }: ChainCardProps) {
         ))}
       </div>
 
-      <AddToken userId={userId} chainIdentifier={identifier} />
+      <div className="flex mt-auto gap-2">
+        <AddToken userId={userId} chainIdentifier={identifier} />
+        <DeleteChain userId={userId} chainIdentifier={identifier} />
+      </div>
     </Card>
   );
 }

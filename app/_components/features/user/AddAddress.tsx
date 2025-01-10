@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Modal from "@/app/_components/Modal";
-import AddressForm from "@/app/_components/AddressForm";
+import AddressForm from "@/app/_components/features/user/AddressForm";
 
 function AddAddress() {
   return (

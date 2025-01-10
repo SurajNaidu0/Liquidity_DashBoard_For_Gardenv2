@@ -151,29 +151,8 @@
                 "max_amount": ""
               }
             ]
-          },
-          {
-            "chainId": 42161,
-            "name": "arb",
-            "identifier": "arb",
-            "chainLogo": "/command.svg",
-            "explorer": "",
-            "chainType": "",
-            "tokens": []
           }
         ]
-      },
-      {
-        "userId": "043585ab-760b-4c10-ad2b-d98306deecd1",
-        "username": "asda",
-        "fillerAddress": "a123",
-        "chains": []
-      },
-      {
-        "userId": "3040fa74-ab61-4190-9272-c48355fd142a",
-        "username": "asda1",
-        "fillerAddress": "12312",
-        "chains": []
       }
     ]
   }

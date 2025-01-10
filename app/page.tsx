@@ -1,7 +1,7 @@
-import UserCard from "@/app/_components/UserCard";
+import AddressCard from "@/app/_components/features/user/AddressCard";
 import config from "@/app/_lib/config.json";
 import type { ConfigType, UserType } from "@/app/_types/types";
-import AddAddress from "@/app/_components/AddAddress";
+import AddAddress from "@/app/_components/features/user/AddAddress";
 import RefreshPage from "@/app/_components/RefreshPage";
 
 export default function Page() {
@@ -21,7 +21,7 @@ export default function Page() {
 
       <main className="space-y-12">
         {users.map((user: UserType) => (
-          <UserCard key={user.userId} userData={user} />
+          <AddressCard key={user.userId} userData={user} />
         ))}
       </main>
     </>

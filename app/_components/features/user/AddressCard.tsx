@@ -1,16 +1,17 @@
 import Image from "next/image";
 import type { UserType } from "@/app/_types/types";
-import ChainCard from "@/app/_components/ChainCard";
+import ChainCard from "@/app/_components/features/chain/ChainCard";
 import Card from "@/app/_components/Card";
 import CopyClipboard from "@/app/_components/CopyClipboard";
-import AddChain from "@/app/_components/AddChain";
-import EditAddress from "@/app/_components/EditAddress";
+import AddChain from "@/app/_components/features/chain/AddChain";
+import EditAddress from "@/app/_components/features/user/EditAddress";
+import DeleteAddress from "@/app/_components/features/user/DeleteAddress";
 
-interface UserCardProps {
+interface AddressCardProps {
   userData: UserType;
 }
 
-function UserCard({ userData }: UserCardProps) {
+function UserCard({ userData }: AddressCardProps) {
   const { userId, username, fillerAddress, chains } = userData;
 
   return (
@@ -34,6 +35,7 @@ function UserCard({ userData }: UserCardProps) {
         </div>
 
         <EditAddress userId={userId} />
+        <DeleteAddress userId={userId} />
       </section>
 
       {chains.map((chain) => (
