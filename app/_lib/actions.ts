@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import config from "@/app/_lib/config.json";
 import type { ChainType, UserType } from "@/app/_types/types";
-import { updateConfig } from "@/app/_lib/utils";
+import { findChain, findUser, updateConfig } from "@/app/_lib/utils";
 
 export async function addAddress(formData: FormData): Promise<void> {
   const username = String(formData.get("name"));
@@ -35,11 +35,11 @@ export async function addChain(
     return;
   }
 
-  const userObject: UserType | undefined = config.data.users.find(
-    (user) => user.userId === userId
-  );
+  const userObject: UserType | undefined = findUser(config, userId);
 
-  userObject?.chains.push({
+  if (!userObject) return;
+
+  userObject.chains.push({
     chainId,
     name,
     identifier: name[0].toLowerCase() + name.slice(1),
@@ -65,15 +65,15 @@ export async function addToken(
     return;
   }
 
-  const userObject: UserType | undefined = config.data.users.find(
-    (user) => user.userId === userId
+  const chainObject: ChainType | undefined = findChain(
+    config,
+    userId,
+    chainIdentifier
   );
 
-  const chainObject: ChainType | undefined = userObject?.chains.find(
-    (chain) => chain.identifier === chainIdentifier
-  );
+  if (!chainObject) return;
 
-  chainObject?.tokens.push({
+  chainObject.tokens.push({
     name,
     decimals: 0,
     symbol: name,
@@ -84,6 +84,27 @@ export async function addToken(
     min_amount: "",
     max_amount: "",
   });
+
+  updateConfig(config);
+  revalidatePath("/");
+}
+
+export async function deleteToken(
+  userId: string,
+  chainIdentifier: string,
+  tokenSymbol: string
+): Promise<void> {
+  const chainObject: ChainType | undefined = findChain(
+    config,
+    userId,
+    chainIdentifier
+  );
+
+  if (!chainObject) return;
+
+  chainObject.tokens = chainObject.tokens.filter(
+    (token) => token.symbol !== tokenSymbol
+  );
 
   updateConfig(config);
   revalidatePath("/");
