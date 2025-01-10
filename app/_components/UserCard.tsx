@@ -4,6 +4,7 @@ import ChainCard from "@/app/_components/ChainCard";
 import Card from "@/app/_components/Card";
 import CopyClipboard from "@/app/_components/CopyClipboard";
 import AddChain from "@/app/_components/AddChain";
+import EditAddress from "@/app/_components/EditAddress";
 
 interface UserCardProps {
   userData: UserType;
@@ -32,10 +33,7 @@ function UserCard({ userData }: UserCardProps) {
           </div>
         </div>
 
-        <button className="ml-auto hover:bg-slate-700 flex items-center gap-2 bg-slate-600 text-white px-4 py-2 rounded-md">
-          <Image src="/pencil-line.svg" alt="Edit" height={20} width={20} />
-          <span>Edit</span>
-        </button>
+        <EditAddress userId={userId} />
       </section>
 
       {chains.map((chain) => (

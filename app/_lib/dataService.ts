@@ -14,9 +14,9 @@ export async function getWalletBalance(
   // Type assertion to treat the response as EtherscanApiResponse
   const data = (await response.json()) as EtherscanApiResponse;
   const balanceInWei: number = parseFloat(data.result);
-  const balanceInGwei = balanceInWei / 10 ** 9;
+  const balanceInEth = balanceInWei / 10 ** 18;
 
-  return balanceInGwei;
+  return balanceInEth;
 }
 
 export async function getWalletBalanceERC20(

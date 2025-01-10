@@ -35,7 +35,7 @@ async function ChainCard({ userId, fillerAddress, chainData }: ChainCardProps) {
         <h3 className="text-lg inline-block mr-auto">{name}</h3>
 
         <Image src="/gas-fill.svg" alt="gas" width={22} height={22} />
-        <span className="text-sm">Gas: {Math.floor(balance)} Gwei</span>
+        <span className="text-sm">Gas: {balance.toFixed(2)} Eth</span>
       </div>
 
       <div>

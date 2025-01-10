@@ -41,7 +41,7 @@ function TokenDisplay({
         </button>
       )}
 
-      <span className="ml-auto font-medium">{balance}</span>
+      <span className="ml-auto font-medium">{balance.toFixed(2)}</span>
     </div>
   );
 }

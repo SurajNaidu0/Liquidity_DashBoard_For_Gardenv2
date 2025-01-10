@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import Modal from "@/app/_components/Modal";
-import Form from "@/app/_components/Form";
-import { addAddress } from "@/app/_lib/actions";
+import AddressForm from "@/app/_components/AddressForm";
 
 function AddAddress() {
   return (
@@ -22,27 +21,7 @@ function AddAddress() {
       </Modal.Open>
 
       <Modal.Window windowName="add-address">
-        <Form
-          title="Add Filler Address"
-          action={addAddress}
-          fields={[
-            {
-              label: "Enter Name",
-              name: "name",
-              placeholder: "Name",
-            },
-            {
-              label: "Enter Filler Address",
-              name: "fillerAddress",
-              placeholder: "Filler Address",
-            },
-          ]}
-          onCloseModal={() => {
-            // will be replaced by onCloseModal coming from cloneElement in Modal
-            return;
-          }}
-          submitText="Add"
-        />
+        <AddressForm />
       </Modal.Window>
     </Modal>
   );

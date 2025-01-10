@@ -1,11 +1,4 @@
-import fs from "fs/promises";
-import path from "path";
 import type { ChainType, ConfigType, UserType } from "@/app/_types/types";
-
-export async function updateConfig(config: ConfigType) {
-  const filePath = path.join(process.cwd(), "app/_lib/config.json");
-  await fs.writeFile(filePath, JSON.stringify(config, null, 2));
-}
 
 export function findUser(config: ConfigType, userId: string) {
   const userObject: UserType | undefined = config.data.users.find(

@@ -4,7 +4,7 @@
       {
         "userId": "1",
         "username": "Relayer",
-        "fillerAddress": "0x661bA32eb5f86CaB358DDbB7F264b10c5825e2dd",
+        "fillerAddress": "0x4EA111A8ca86c17Aa34a016f78F294C55593C307",
         "chains": [
           {
             "chainId": 1,
@@ -125,6 +125,55 @@
             "identifier": "ethereum"
           }
         ]
+      },
+      {
+        "userId": "d0366608-48cd-420a-a545-a1169e4c30c0",
+        "username": "asda",
+        "fillerAddress": "0x4EA111A8ca86c17Aa34a016f78F294C55593C307",
+        "chains": [
+          {
+            "chainId": 1,
+            "name": "Etherium",
+            "identifier": "etherium",
+            "chainLogo": "/command.svg",
+            "explorer": "",
+            "chainType": "",
+            "tokens": [
+              {
+                "name": "doge",
+                "decimals": 0,
+                "symbol": "doge",
+                "baseFees": 0,
+                "logo": "/coin.svg",
+                "tokenAddress": "0x66a1E37c9b0eAddca17d3662D6c05F4DECf3e110",
+                "atomicSwapAddress": "",
+                "min_amount": "",
+                "max_amount": ""
+              }
+            ]
+          },
+          {
+            "chainId": 42161,
+            "name": "arb",
+            "identifier": "arb",
+            "chainLogo": "/command.svg",
+            "explorer": "",
+            "chainType": "",
+            "tokens": []
+          }
+        ]
+      },
+      {
+        "userId": "043585ab-760b-4c10-ad2b-d98306deecd1",
+        "username": "asda",
+        "fillerAddress": "a123",
+        "chains": []
+      },
+      {
+        "userId": "3040fa74-ab61-4190-9272-c48355fd142a",
+        "username": "asda1",
+        "fillerAddress": "12312",
+        "chains": []
       }
     ]
   }

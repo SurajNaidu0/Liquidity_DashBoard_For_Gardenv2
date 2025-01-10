@@ -1,9 +1,16 @@
 "use server";
 
+import fs from "fs/promises";
+import path from "path";
 import { revalidatePath } from "next/cache";
 import config from "@/app/_lib/config.json";
-import type { ChainType, UserType } from "@/app/_types/types";
-import { findChain, findUser, updateConfig } from "@/app/_lib/utils";
+import type { ChainType, ConfigType, UserType } from "@/app/_types/types";
+import { findChain, findUser } from "@/app/_lib/utils";
+
+async function updateConfig(config: ConfigType) {
+  const filePath = path.join(process.cwd(), "app/_lib/config.json");
+  await fs.writeFile(filePath, JSON.stringify(config, null, 2));
+}
 
 export async function addAddress(formData: FormData): Promise<void> {
   const username = String(formData.get("name"));
@@ -19,6 +26,27 @@ export async function addAddress(formData: FormData): Promise<void> {
     fillerAddress,
     chains: [],
   });
+
+  updateConfig(config);
+  revalidatePath("/");
+}
+
+export async function editAddress(
+  userId: string,
+  formData: FormData
+): Promise<void> {
+  const username = String(formData.get("name"));
+  const fillerAddress = String(formData.get("fillerAddress"));
+
+  if (!username || !fillerAddress) {
+    return;
+  }
+
+  const userObject: UserType | undefined = findUser(config, userId);
+  if (!userObject) return;
+
+  userObject.username = username;
+  userObject.fillerAddress = fillerAddress;
 
   updateConfig(config);
   revalidatePath("/");
