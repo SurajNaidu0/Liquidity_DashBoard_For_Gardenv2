@@ -1,9 +1,9 @@
 {
   "data": {
-    "users": [
+    "addresses": [
       {
-        "userId": "1",
-        "username": "Relayer",
+        "addressId": "1",
+        "addressName": "Relayer",
         "fillerAddress": "0x4EA111A8ca86c17Aa34a016f78F294C55593C307",
         "chains": [
           {
@@ -127,22 +127,22 @@
         ]
       },
       {
-        "userId": "d0366608-48cd-420a-a545-a1169e4c30c0",
-        "username": "asda",
+        "addressId": "60442459-eee4-4471-bd82-092fafb289fa",
+        "addressName": "pingubtc",
         "fillerAddress": "0x4EA111A8ca86c17Aa34a016f78F294C55593C307",
         "chains": [
           {
             "chainId": 1,
-            "name": "Etherium",
-            "identifier": "etherium",
+            "name": "eth",
+            "identifier": "eth",
             "chainLogo": "/command.svg",
             "explorer": "",
             "chainType": "",
             "tokens": [
               {
-                "name": "doge",
+                "name": "isohf",
                 "decimals": 0,
-                "symbol": "doge",
+                "symbol": "isohf",
                 "baseFees": 0,
                 "logo": "/coin.svg",
                 "tokenAddress": "0x66a1E37c9b0eAddca17d3662D6c05F4DECf3e110",
@@ -151,6 +151,15 @@
                 "max_amount": ""
               }
             ]
+          },
+          {
+            "chainId": 8453,
+            "name": "base",
+            "identifier": "base",
+            "chainLogo": "/command.svg",
+            "explorer": "",
+            "chainType": "",
+            "tokens": []
           }
         ]
       }

@@ -10,13 +10,13 @@ import type { ChainType, TokenType } from "@/app/_types/types";
 import DeleteChain from "@/app/_components/features/chain/DeleteChain";
 
 interface ChainCardProps {
-  userId: string;
+  addressId: string;
   fillerAddress: string;
   chainData: ChainType;
 }
 
 interface TokenProps {
-  userId: string;
+  addressId: string;
   fillerAddress: string;
   chainId: number;
   chainIdentifier: string;
@@ -24,7 +24,11 @@ interface TokenProps {
   delayIndex: number;
 }
 
-async function ChainCard({ userId, fillerAddress, chainData }: ChainCardProps) {
+async function ChainCard({
+  addressId,
+  fillerAddress,
+  chainData,
+}: ChainCardProps) {
   const { chainId, identifier, chainLogo, name, tokens } = chainData;
 
   const balance = await getWalletBalance(fillerAddress, chainId);
@@ -43,7 +47,7 @@ async function ChainCard({ userId, fillerAddress, chainData }: ChainCardProps) {
         {tokens.map((token, index) => (
           <Token
             key={token.name}
-            userId={userId}
+            addressId={addressId}
             fillerAddress={fillerAddress}
             chainId={chainId}
             chainIdentifier={identifier}
@@ -54,15 +58,15 @@ async function ChainCard({ userId, fillerAddress, chainData }: ChainCardProps) {
       </div>
 
       <div className="flex mt-auto gap-2">
-        <AddToken userId={userId} chainIdentifier={identifier} />
-        <DeleteChain userId={userId} chainIdentifier={identifier} />
+        <AddToken addressId={addressId} chainIdentifier={identifier} />
+        <DeleteChain addressId={addressId} chainIdentifier={identifier} />
       </div>
     </Card>
   );
 }
 
 async function Token({
-  userId,
+  addressId,
   fillerAddress,
   chainId,
   chainIdentifier,
@@ -80,7 +84,7 @@ async function Token({
 
   return (
     <TokenDisplay
-      userId={userId}
+      addressId={addressId}
       chainIdentifier={chainIdentifier}
       logo={logo}
       symbol={symbol}

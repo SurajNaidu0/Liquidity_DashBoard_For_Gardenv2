@@ -4,13 +4,13 @@ import { deleteAddress } from "@/app/_lib/actions";
 import Image from "next/image";
 
 interface DeleteAddressProps {
-  userId: string;
+  addressId: string;
 }
 
-function DeleteAddress({ userId }: DeleteAddressProps) {
+function DeleteAddress({ addressId }: DeleteAddressProps) {
   return (
     <button
-      onClick={() => deleteAddress(userId)}
+      onClick={() => deleteAddress(addressId)}
       type="button"
       className="px-4 py-2 border border-red-300 hover:bg-red-100 rounded-md flex-shrink-0 flex items-center justify-center gap-1.5 text-red-600"
       title="Delete Address"

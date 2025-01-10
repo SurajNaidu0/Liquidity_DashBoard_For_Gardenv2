@@ -4,14 +4,14 @@ import { deleteChain } from "@/app/_lib/actions";
 import Image from "next/image";
 
 interface DeleteChainProps {
-  userId: string;
+  addressId: string;
   chainIdentifier: string;
 }
 
-function DeleteChain({ userId, chainIdentifier }: DeleteChainProps) {
+function DeleteChain({ addressId, chainIdentifier }: DeleteChainProps) {
   return (
     <button
-      onClick={() => deleteChain(userId, chainIdentifier)}
+      onClick={() => deleteChain(addressId, chainIdentifier)}
       type="button"
       className="h-full p-2 border border-red-300 hover:bg-red-100 rounded-md flex-shrink-0 aspect-square grid place-items-center"
       title="Delete Chain"

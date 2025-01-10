@@ -6,11 +6,11 @@ import Form from "@/app/_components/Form";
 import { addToken } from "@/app/_lib/actions";
 
 interface AddTokenProps {
-  userId: string;
+  addressId: string;
   chainIdentifier: string;
 }
 
-function AddToken({ userId, chainIdentifier }: AddTokenProps) {
+function AddToken({ addressId, chainIdentifier }: AddTokenProps) {
   return (
     <Modal>
       <Modal.Open windowName="add-token">
@@ -23,7 +23,7 @@ function AddToken({ userId, chainIdentifier }: AddTokenProps) {
       <Modal.Window windowName="add-token">
         <Form
           title="Add Token"
-          action={addToken.bind(null, userId, chainIdentifier)}
+          action={addToken.bind(null, addressId, chainIdentifier)}
           fields={[
             {
               label: "Enter Name",

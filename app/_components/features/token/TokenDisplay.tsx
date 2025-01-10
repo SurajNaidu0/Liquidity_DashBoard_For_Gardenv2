@@ -5,7 +5,7 @@ import { useState } from "react";
 import { deleteToken } from "@/app/_lib/actions";
 
 interface TokenDisplayProps {
-  userId: string;
+  addressId: string;
   chainIdentifier: string;
   logo: string;
   symbol: string;
@@ -13,7 +13,7 @@ interface TokenDisplayProps {
 }
 
 function TokenDisplay({
-  userId,
+  addressId,
   chainIdentifier,
   logo,
   symbol,
@@ -35,7 +35,7 @@ function TokenDisplay({
         <button
           aria-label="Delete Token"
           title="Delete Token"
-          onClick={() => deleteToken(userId, chainIdentifier, symbol)}
+          onClick={() => deleteToken(addressId, chainIdentifier, symbol)}
         >
           <Image src="/trash.svg" alt="Delete" height={18} width={18} />
         </button>

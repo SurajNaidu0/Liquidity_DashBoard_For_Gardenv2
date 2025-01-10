@@ -20,15 +20,15 @@ export interface ChainType {
   tokens: TokenType[];
 }
 
-export interface UserType {
-  userId: string;
-  username: string;
+export interface AddressType {
+  addressId: string;
+  addressName: string;
   fillerAddress: string;
   chains: ChainType[];
 }
 
 export interface ConfigType {
   data: {
-    users: UserType[];
+    addresses: AddressType[];
   };
 }

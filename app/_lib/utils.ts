@@ -1,23 +1,23 @@
-import type { ChainType, ConfigType, UserType } from "@/app/_types/types";
+import type { ChainType, ConfigType, AddressType } from "@/app/_types/types";
 
-export function findUser(config: ConfigType, userId: string) {
-  const userObject: UserType | undefined = config.data.users.find(
-    (user) => user.userId === userId
+export function findAddress(config: ConfigType, addressId: string) {
+  const addressObject: AddressType | undefined = config.data.addresses.find(
+    (address) => address.addressId === addressId
   );
 
-  return userObject;
+  return addressObject;
 }
 
 export function findChain(
   config: ConfigType,
-  userId: string,
+  addressId: string,
   chainIdentifier: string
 ) {
-  const userObject: UserType | undefined = config.data.users.find(
-    (user) => user.userId === userId
+  const addressObject: AddressType | undefined = config.data.addresses.find(
+    (address) => address.addressId === addressId
   );
 
-  const chainObject: ChainType | undefined = userObject?.chains.find(
+  const chainObject: ChainType | undefined = addressObject?.chains.find(
     (chain) => chain.identifier === chainIdentifier
   );
 

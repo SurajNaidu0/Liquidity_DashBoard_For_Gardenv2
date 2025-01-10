@@ -4,8 +4,8 @@ import fs from "fs/promises";
 import path from "path";
 import { revalidatePath } from "next/cache";
 import config from "@/app/_lib/config.json";
-import type { ChainType, ConfigType, UserType } from "@/app/_types/types";
-import { findChain, findUser } from "@/app/_lib/utils";
+import type { ChainType, ConfigType, AddressType } from "@/app/_types/types";
+import { findChain, findAddress } from "@/app/_lib/utils";
 
 async function updateConfig(config: ConfigType) {
   const filePath = path.join(process.cwd(), "app/_lib/config.json");
@@ -13,16 +13,16 @@ async function updateConfig(config: ConfigType) {
 }
 
 export async function addAddress(formData: FormData): Promise<void> {
-  const username = String(formData.get("name"));
+  const addressName = String(formData.get("name"));
   const fillerAddress = String(formData.get("fillerAddress"));
 
-  if (!username || !fillerAddress) {
+  if (!addressName || !fillerAddress) {
     return;
   }
 
-  config.data.users.push({
-    userId: crypto.randomUUID(),
-    username,
+  config.data.addresses.push({
+    addressId: crypto.randomUUID(),
+    addressName,
     fillerAddress,
     chains: [],
   });
@@ -32,29 +32,29 @@ export async function addAddress(formData: FormData): Promise<void> {
 }
 
 export async function editAddress(
-  userId: string,
+  addressId: string,
   formData: FormData
 ): Promise<void> {
-  const username = String(formData.get("name"));
+  const addressName = String(formData.get("name"));
   const fillerAddress = String(formData.get("fillerAddress"));
 
-  if (!username || !fillerAddress) {
+  if (!addressName || !fillerAddress) {
     return;
   }
 
-  const userObject: UserType | undefined = findUser(config, userId);
-  if (!userObject) return;
+  const addressObject: AddressType | undefined = findAddress(config, addressId);
+  if (!addressObject) return;
 
-  userObject.username = username;
-  userObject.fillerAddress = fillerAddress;
+  addressObject.addressName = addressName;
+  addressObject.fillerAddress = fillerAddress;
 
   updateConfig(config);
   revalidatePath("/");
 }
 
-export async function deleteAddress(userId: string): Promise<void> {
-  config.data.users = config.data.users.filter(
-    (user) => user.userId !== userId
+export async function deleteAddress(addressId: string): Promise<void> {
+  config.data.addresses = config.data.addresses.filter(
+    (address) => address.addressId !== addressId
   );
 
   updateConfig(config);
@@ -62,7 +62,7 @@ export async function deleteAddress(userId: string): Promise<void> {
 }
 
 export async function addChain(
-  userId: string,
+  addressId: string,
   formData: FormData
 ): Promise<void> {
   const name = String(formData.get("name"));
@@ -72,11 +72,11 @@ export async function addChain(
     return;
   }
 
-  const userObject: UserType | undefined = findUser(config, userId);
+  const addressObject: AddressType | undefined = findAddress(config, addressId);
 
-  if (!userObject) return;
+  if (!addressObject) return;
 
-  userObject.chains.push({
+  addressObject.chains.push({
     chainId,
     name,
     identifier: name[0].toLowerCase() + name.slice(1),
@@ -91,14 +91,14 @@ export async function addChain(
 }
 
 export async function deleteChain(
-  userId: string,
+  addressId: string,
   chainIdentifier: string
 ): Promise<void> {
-  const userObject: UserType | undefined = findUser(config, userId);
+  const addressObject: AddressType | undefined = findAddress(config, addressId);
 
-  if (!userObject) return;
+  if (!addressObject) return;
 
-  userObject.chains = userObject.chains.filter(
+  addressObject.chains = addressObject.chains.filter(
     (chain) => chain.identifier !== chainIdentifier
   );
 
@@ -107,7 +107,7 @@ export async function deleteChain(
 }
 
 export async function addToken(
-  userId: string,
+  addressId: string,
   chainIdentifier: string,
   formData: FormData
 ): Promise<void> {
@@ -120,7 +120,7 @@ export async function addToken(
 
   const chainObject: ChainType | undefined = findChain(
     config,
-    userId,
+    addressId,
     chainIdentifier
   );
 
@@ -143,13 +143,13 @@ export async function addToken(
 }
 
 export async function deleteToken(
-  userId: string,
+  addressId: string,
   chainIdentifier: string,
   tokenSymbol: string
 ): Promise<void> {
   const chainObject: ChainType | undefined = findChain(
     config,
-    userId,
+    addressId,
     chainIdentifier
   );
 

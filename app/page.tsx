@@ -1,12 +1,12 @@
-import AddressCard from "@/app/_components/features/user/AddressCard";
+import AddressCard from "@/app/_components/features/address/AddressCard";
 import config from "@/app/_lib/config.json";
-import type { ConfigType, UserType } from "@/app/_types/types";
-import AddAddress from "@/app/_components/features/user/AddAddress";
+import type { ConfigType, AddressType } from "@/app/_types/types";
+import AddAddress from "@/app/_components/features/address/AddAddress";
 import RefreshPage from "@/app/_components/RefreshPage";
 
 export default function Page() {
   const {
-    data: { users },
+    data: { addresses },
   }: ConfigType = config;
 
   return (
@@ -20,8 +20,8 @@ export default function Page() {
       </header>
 
       <main className="space-y-12">
-        {users.map((user: UserType) => (
-          <AddressCard key={user.userId} userData={user} />
+        {addresses.map((address: AddressType) => (
+          <AddressCard key={address.addressId} addressData={address} />
         ))}
       </main>
     </>

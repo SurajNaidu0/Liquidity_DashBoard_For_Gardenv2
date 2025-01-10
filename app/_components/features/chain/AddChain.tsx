@@ -6,10 +6,10 @@ import Form from "@/app/_components/Form";
 import { addChain } from "@/app/_lib/actions";
 
 interface AddTokenProps {
-  userId: string;
+  addressId: string;
 }
 
-function AddChain({ userId }: AddTokenProps) {
+function AddChain({ addressId }: AddTokenProps) {
   return (
     <Modal>
       <Modal.Open windowName="add-chain">
@@ -22,7 +22,7 @@ function AddChain({ userId }: AddTokenProps) {
       <Modal.Window windowName="add-chain">
         <Form
           title="Add Chain"
-          action={addChain.bind(null, userId)}
+          action={addChain.bind(null, addressId)}
           fields={[
             {
               label: "Enter Name",

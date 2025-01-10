@@ -2,13 +2,13 @@
 
 import Image from "next/image";
 import Modal from "@/app/_components/Modal";
-import AddressForm from "@/app/_components/features/user/AddressForm";
+import AddressForm from "@/app/_components/features/address/AddressForm";
 
 interface EditAddressProps {
-  userId: string;
+  addressId: string;
 }
 
-function EditAddress({ userId }: EditAddressProps) {
+function EditAddress({ addressId }: EditAddressProps) {
   return (
     <Modal>
       <Modal.Open windowName="edit-address">
@@ -19,7 +19,7 @@ function EditAddress({ userId }: EditAddressProps) {
       </Modal.Open>
 
       <Modal.Window windowName="edit-address">
-        <AddressForm userIdToEdit={userId} />
+        <AddressForm addressIdToEdit={addressId} />
       </Modal.Window>
     </Modal>
   );
