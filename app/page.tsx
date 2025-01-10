@@ -1,29 +1,27 @@
-import BitcoinCard from "@/app/_components/BitcoinCard";
-import ChainCard from "@/app/_components/ChainCard";
+import UserCard from "@/app/_components/UserCard";
 import config from "@/app/_lib/config.json";
-import type { NetworkType } from "./_types/types";
+import type { ConfigType, UserType } from "@/app/_types/types";
+import AddAddress from "@/app/_components/AddAddress";
 
 export default function Page() {
-  const bitcoinData: NetworkType = config.data.networks.find(
-    (network) => network.identifier === "bitcoin"
-  )!;
-  const evmChainsData: NetworkType[] = config.data.networks.filter(
-    (network) => network.identifier !== "bitcoin"
-  );
+  const {
+    data: { users },
+  }: ConfigType = config;
 
   return (
-    <main className="px-4 sm:p-8 max-w-[90rem] mx-auto">
-      <h1 className="text-3xl text-center font-bold my-12">
-        Liquidity Dashboard
-      </h1>
+    <>
+      <header className="flex justify-between items-center">
+        <h1 className="text-3xl text-slate-700 text-center font-bold my-12">
+          # Liquidity Dashboard
+        </h1>
+        <AddAddress />
+      </header>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(22rem,1fr))] gap-6">
-        {bitcoinData && <BitcoinCard bitcoinData={bitcoinData} />}
-
-        {evmChainsData.map((chain) => (
-          <ChainCard key={chain.identifier} chainData={chain} />
+      <main className="space-y-12">
+        {users.map((user: UserType) => (
+          <UserCard key={user.userId} userData={user} />
         ))}
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

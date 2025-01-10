@@ -1,10 +1,17 @@
 import type { ReactNode } from "react";
 
-function Card({ children }: { children: ReactNode }) {
+interface CardProps {
+  className?: string;
+  children: ReactNode;
+}
+
+function Card({ className, children }: CardProps) {
   return (
-    <article className="flex flex-col gap-4 rounded-xl border shadow p-6">
+    <section
+      className={`flex flex-col gap-4 rounded-xl border border-stone-200 shadow p-6 ${className}`}
+    >
       {children}
-    </article>
+    </section>
   );
 }
 

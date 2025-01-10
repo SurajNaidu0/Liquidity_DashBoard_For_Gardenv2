@@ -10,13 +10,25 @@ export interface TokenType {
   max_amount: string;
 }
 
-export interface NetworkType {
+export interface ChainType {
   chainId: number;
   name: string;
   identifier: string;
-  fillerAddresses: string[];
-  networkLogo: string;
+  chainLogo: string;
   explorer: string;
-  networkType: string;
-  assetConfig: TokenType[];
+  chainType: string;
+  tokens: TokenType[];
+}
+
+export interface UserType {
+  userId: string;
+  username: string;
+  fillerAddress: string;
+  chains: ChainType[];
+}
+
+export interface ConfigType {
+  data: {
+    users: UserType[];
+  };
 }
