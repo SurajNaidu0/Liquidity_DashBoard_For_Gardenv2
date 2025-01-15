@@ -1,16 +1,8 @@
 "use server";
 
-import fs from "fs/promises";
-import path from "path";
-import { revalidatePath } from "next/cache";
-import config from "@/app/_lib/config.json";
-import type { ChainType, ConfigType, AddressType } from "@/app/_types/types";
-import { findChain, findAddress } from "@/app/_lib/utils";
+import JsonMiddleware from "@/app/_lib/jsonMiddleware";
 
-async function updateConfig(config: ConfigType) {
-  const filePath = path.join(process.cwd(), "app/_lib/config.json");
-  await fs.writeFile(filePath, JSON.stringify(config, null, 2));
-}
+const jsonMiddleware = new JsonMiddleware();
 
 export async function addAddress(formData: FormData): Promise<void> {
   const addressName = String(formData.get("name"));
@@ -20,15 +12,7 @@ export async function addAddress(formData: FormData): Promise<void> {
     return;
   }
 
-  config.data.addresses.push({
-    addressId: crypto.randomUUID(),
-    addressName,
-    fillerAddress,
-    chains: [],
-  });
-
-  updateConfig(config);
-  revalidatePath("/");
+  await jsonMiddleware.addAddress(addressName, fillerAddress);
 }
 
 export async function editAddress(
@@ -42,23 +26,11 @@ export async function editAddress(
     return;
   }
 
-  const addressObject: AddressType | undefined = findAddress(config, addressId);
-  if (!addressObject) return;
-
-  addressObject.addressName = addressName;
-  addressObject.fillerAddress = fillerAddress;
-
-  updateConfig(config);
-  revalidatePath("/");
+  await jsonMiddleware.editAddress(addressId, addressName, fillerAddress);
 }
 
 export async function deleteAddress(addressId: string): Promise<void> {
-  config.data.addresses = config.data.addresses.filter(
-    (address) => address.addressId !== addressId
-  );
-
-  updateConfig(config);
-  revalidatePath("/");
+  await jsonMiddleware.deleteAddress(addressId);
 }
 
 export async function addChain(
@@ -72,38 +44,14 @@ export async function addChain(
     return;
   }
 
-  const addressObject: AddressType | undefined = findAddress(config, addressId);
-
-  if (!addressObject) return;
-
-  addressObject.chains.push({
-    chainId,
-    name,
-    identifier: name[0].toLowerCase() + name.slice(1),
-    chainLogo: "/command.svg",
-    explorer: "",
-    chainType: "",
-    tokens: [],
-  });
-
-  updateConfig(config);
-  revalidatePath("/");
+  await jsonMiddleware.addChain(addressId, name, chainId);
 }
 
 export async function deleteChain(
   addressId: string,
   chainIdentifier: string
 ): Promise<void> {
-  const addressObject: AddressType | undefined = findAddress(config, addressId);
-
-  if (!addressObject) return;
-
-  addressObject.chains = addressObject.chains.filter(
-    (chain) => chain.identifier !== chainIdentifier
-  );
-
-  updateConfig(config);
-  revalidatePath("/");
+  await jsonMiddleware.deleteChain(addressId, chainIdentifier);
 }
 
 export async function addToken(
@@ -118,28 +66,7 @@ export async function addToken(
     return;
   }
 
-  const chainObject: ChainType | undefined = findChain(
-    config,
-    addressId,
-    chainIdentifier
-  );
-
-  if (!chainObject) return;
-
-  chainObject.tokens.push({
-    name,
-    decimals: 0,
-    symbol: name,
-    baseFees: 0,
-    logo: "/coin.svg",
-    tokenAddress,
-    atomicSwapAddress: "",
-    min_amount: "",
-    max_amount: "",
-  });
-
-  updateConfig(config);
-  revalidatePath("/");
+  await jsonMiddleware.addToken(addressId, chainIdentifier, name, tokenAddress);
 }
 
 export async function deleteToken(
@@ -147,18 +74,5 @@ export async function deleteToken(
   chainIdentifier: string,
   tokenSymbol: string
 ): Promise<void> {
-  const chainObject: ChainType | undefined = findChain(
-    config,
-    addressId,
-    chainIdentifier
-  );
-
-  if (!chainObject) return;
-
-  chainObject.tokens = chainObject.tokens.filter(
-    (token) => token.symbol !== tokenSymbol
-  );
-
-  updateConfig(config);
-  revalidatePath("/");
+  await jsonMiddleware.deleteToken(addressId, chainIdentifier, tokenSymbol);
 }

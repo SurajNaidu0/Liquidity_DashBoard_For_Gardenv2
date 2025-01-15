@@ -32,3 +32,26 @@ export interface ConfigType {
     addresses: AddressType[];
   };
 }
+
+export interface DataMiddleware {
+  addAddress(addressName: string, fillerAddress: string): Promise<void>;
+  editAddress(
+    addressId: string,
+    addressName: string,
+    fillerAddress: string
+  ): Promise<void>;
+  deleteAddress(addressId: string): Promise<void>;
+  addChain(addressId: string, name: string, chainId: number): Promise<void>;
+  deleteChain(addressId: string, chainIdentifier: string): Promise<void>;
+  addToken(
+    addressId: string,
+    chainIdentifier: string,
+    name: string,
+    tokenAddress: string
+  ): Promise<void>;
+  deleteToken(
+    addressId: string,
+    chainIdentifier: string,
+    tokenSymbol: string
+  ): Promise<void>;
+}
